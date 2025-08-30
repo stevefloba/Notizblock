@@ -24,13 +24,15 @@ function renderTrashNotes() {
     }
 }
 
+
 function getNoteTemplate(indexNote) {
-    return `<p>+ ${notes[indexNote]}<button onclick="deleteNote(${indexNote})">X</button></p>`;
+    return `<p>+ ${notes[indexNote]}<button onclick="pushNoteToTrash(${indexNote})">🗑️</button></p>`;
 }
 
 function getTrashNoteTemplate(indexTrashNote) {
-    return `<p>+ ${trashNotes[indexTrashNote]}<button onclick="deleteNote(${indexTrashNote})">X</button></p>`;
+    return `<p>+ ${trashNotes[indexTrashNote]}<button onclick="deleteNote(${indexTrashNote})">❌</button></p>`;
 }
+
 
 function addNote() {
     let noteInputRef = document.getElementById('note_input');
@@ -43,14 +45,19 @@ function addNote() {
     noteInputRef.value = "";
 }
 
-function deleteNote(indexNote) {
+function pushNoteToTrash(indexNote) {
     let trashNote = notes.splice(indexNote, 1); // besser(?): let trashNote = notes.splice(indexNote, 1)[0];
     trashNotes.push(trashNote);
     renderNotes();
     renderTrashNotes();
 }
 
-
+// my work. komplett löschen
+function deleteNote(indexTrashNote) {
+    trashNotes.splice(indexTrashNote, 1);
+    renderTrashNotes();
+}
+//
 
 
 
