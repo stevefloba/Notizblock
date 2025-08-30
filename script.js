@@ -7,26 +7,28 @@ function renderNotes() {
     contentRef.innerHTML = "";
 
     for (let indexNote = 0; indexNote < notes.length; indexNote++) {
-        const note = notes[indexNote];
-        contentRef.innerHTML += getNoteTemplate(note);
+        contentRef.innerHTML += getNoteTemplate(indexNote);
     }
 }
 
-function getNoteTemplate(note){
-    return `<p>+ ${note}</p>`;
+function getNoteTemplate(indexNote) {
+    return `<p>+ ${notes[indexNote]}<button onclick="deleteNote(${indexNote})">X</button></p>`;
 }
 
-// Notizen hinzufügen
+function addNote() {
+    let noteInputRef = document.getElementById('note_input');
+    let noteinput = noteInputRef.value;
 
-function addNote(){
-let noteInputRef = document.getElementById('note_input');
-let noteinput = noteInputRef.value;
+    notes.push(noteinput);
 
-notes.push(noteinput);
+    renderNotes();
 
-renderNotes()
+    noteInputRef.value = "";
+}
 
-noteInputRef.value = "";
+function deleteNote(indexNote) {
+    notes.splice(indexNote, 1);
+    renderNotes();
 }
 
 
@@ -35,6 +37,4 @@ noteInputRef.value = "";
 
 
 
-
-// Notizen löschen
 // Notizen archivieren
